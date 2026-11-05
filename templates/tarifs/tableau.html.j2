@@ -26,13 +26,15 @@ td.total { font-weight: 700; background: #e8edf7; }
   main { padding: 0.5rem 0 0; }
   .defilement { overflow: visible; }
   table { min-width: 0; width: 100%; table-layout: fixed; font-size: 15px; }
-  th[scope="col"] { white-space: normal; line-height: 1.2; }
-  th[scope="col"]:nth-child(1) { width: 17%; }
+  th[scope="col"] { white-space: normal; line-height: 1.2; font-size: 13px; overflow-wrap: anywhere; }
+  {# Widths leave room for wider fonts (DejaVu Sans on the CI runner): numbers
+     never wrap, headers wrap on two or three lines at most. #}
+  th[scope="col"]:nth-child(1) { width: 16%; }
   th[scope="col"]:nth-child(2) { width: 8%; }
-  th[scope="col"]:nth-child(3) { width: 12%; }
-  th[scope="col"]:nth-child(4) { width: 6%; }
-  th[scope="col"]:nth-child(5) { width: 6%; }
-  th[scope="col"]:nth-child(6) { width: 9%; }
+  th[scope="col"]:nth-child(3) { width: 11%; }
+  th[scope="col"]:nth-child(4) { width: 6.5%; }
+  th[scope="col"]:nth-child(5) { width: 6.5%; }
+  th[scope="col"]:nth-child(6) { width: 10%; }
   th[scope="col"]:nth-child(7) { width: 8%; }
   {# Les colonnes de remise famille (à partir de la 8ᵉ) se partagent
      le reste de la largeur, quel que soit leur nombre. #}
@@ -40,7 +42,8 @@ td.total { font-weight: 700; background: #e8edf7; }
   th[scope="col"]:nth-child({{ 7 + loop.index }}) { width: {{ (34 / remises_famille | length) | round(2) }}%; }
   {% endfor %}
   caption { font-size: 14px; padding-bottom: 0.5rem; }
-  th, td { padding: 0.55rem 0.6rem; }
+  th, td { padding: 0.5rem 0.45rem; }
+  td { white-space: nowrap; font-variant-numeric: tabular-nums; }
   .notes { margin-top: 1rem; }
   .notes p, .notes span { font-size: 14px; font-weight: normal; margin: 0.35rem 0; }
 }

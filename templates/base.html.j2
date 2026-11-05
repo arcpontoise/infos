@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="{{ charte }}/css/charte.css">
 <style>
 /* Site-specific rules; shared styles come from the charte */
+/* Generated PDFs use the embedded font, so every build machine renders them the same */
+@media print { body { font-family: var(--font-print); } }
 {% block styles %}{% endblock %}
 </style>
 </head>

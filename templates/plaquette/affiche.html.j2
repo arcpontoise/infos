@@ -8,6 +8,24 @@
 <link rel="stylesheet" href="{{ charte }}/css/tokens.css">
 <style>
 @font-face {
+  font-family: "Inter";
+  src: url("{{ charte }}/fonts/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("{{ charte }}/fonts/inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("{{ charte }}/fonts/inter-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
   font-family: "Caveat";
   src: url("{{ charte }}/fonts/caveat.woff2") format("woff2");
   font-weight: 400 700;
@@ -18,7 +36,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: 16px/1.5 var(--font-body);
+  font: 16px/1.5 var(--font-print);
 }
 .affiche {
   position: relative;
