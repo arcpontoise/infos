@@ -20,7 +20,7 @@ header.site .adresse { margin: 0.3rem 0 0; color: #ccd4ea; font-size: 0.92rem; }
 .pastille { width: 14px; height: 14px; border-radius: 2px; flex: none; }
 .pastille.jeunes { background: var(--accent); }
 .pastille.adultes { background: var(--blue); }
-.pastille.tous { background: var(--blue-mid); }
+.pastille.tous { background: #fff; border: 1.5px solid var(--blue-mid); border-left-width: 4px; }
 .pastille.libre { background: none; border: 2px dashed var(--accent); }
 .semaine {
   display: grid;
@@ -42,13 +42,19 @@ header.site .adresse { margin: 0.3rem 0 0; color: #ccd4ea; font-size: 0.92rem; }
   padding-bottom: 0.45rem;
 }
 .creneau {
-  border-left: 3px solid var(--gray-soft);
+  border-left: 4px solid var(--gray-soft);
   padding: 0.15rem 0 0.25rem 0.8rem;
   margin: 0 0 0.9rem;
 }
 .creneau.jeunes { border-color: var(--accent); }
 .creneau.adultes { border-color: var(--blue); }
-.creneau.tous { border-color: var(--blue-mid); }
+/* Everyone: outlined, as in the weekly grid */
+.creneau.tous {
+  border: 1.5px solid var(--blue-mid);
+  border-left-width: 4px;
+  border-radius: 3px;
+  padding: 0.3rem 0.5rem 0.35rem 0.8rem;
+}
 .heure { font-weight: 700; color: var(--blue); }
 .creneau h3 { margin: 0.1rem 0 0.15rem; font-size: 1rem; font-weight: 600; }
 .creneau p { margin: 0.1rem 0 0; font-size: 0.88rem; color: var(--gray); }
@@ -57,9 +63,9 @@ header.site .adresse { margin: 0.3rem 0 0; color: #ccd4ea; font-size: 0.92rem; }
   border-radius: 4px;
   padding: 0.5rem 0.75rem;
   font-size: 0.88rem;
-  color: var(--accent);
+  color: var(--ink);
 }
-.libre strong { font-weight: 600; }
+.libre strong { font-weight: 600; color: var(--accent); }
 .note { font-size: 1.2rem; font-weight: 600; margin: 1.2rem 0 0.2rem; }
 @media print {
   body { background: #fff; font-size: 12px; }
@@ -68,6 +74,7 @@ header.site .adresse { margin: 0.3rem 0 0; color: #ccd4ea; font-size: 0.92rem; }
   nav.site, .autre-vue { display: none; }
   .semaine { grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
   .jour { border-radius: 0; break-inside: avoid; }
+  .pastille, .creneau { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
 }
 {% endblock %}
 {% block contenu %}

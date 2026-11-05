@@ -11,7 +11,8 @@
 .pastille { display: inline-block; width: 13px; height: 13px; border-radius: 2px; flex: none; }
 .pastille.jeunes { background: var(--accent); }
 .pastille.adultes { background: var(--blue); }
-.pastille.tous { background: var(--blue-mid); }
+/* Everyone: outlined, so the three audiences stay distinct in black and white */
+.pastille.tous { background: #fff; border: 1.5px solid var(--blue-mid); border-left-width: 4px; }
 .pastille.libre { background: none; border: 2px dashed var(--accent); }
 .grille { min-width: {{ 58 + jours_grille | length * 115 }}px; }
 .entetes, .corps, .rangee-libre {
@@ -73,7 +74,12 @@
 .bloc.compact h3 { margin: 1px 0; }
 .bloc.jeunes { background: var(--accent); border-color: var(--blue); }
 .bloc.adultes { background: var(--blue); border-color: var(--ink); }
-.bloc.tous { background: var(--blue-mid); border-color: var(--ink); }
+.bloc.tous {
+  background: #fff;
+  color: var(--ink);
+  border: 1.5px solid var(--blue-mid);
+  border-left: 3px solid var(--blue-mid);
+}
 .bloc h3 {
   color: inherit;
   margin: 1px 0 2px;
@@ -82,14 +88,17 @@
   text-transform: none;
   letter-spacing: 0;
 }
-.bloc p { margin: 0; opacity: 0.88; font-size: 0.92em; }
+/* No hyphenation on names nor in narrow side-by-side slots */
+.bloc p { margin: 0; opacity: 0.88; font-size: 0.92em; hyphens: manual; }
+.bloc.compact { hyphens: manual; overflow-wrap: normal; }
 .rangee-libre { margin-top: 6px; }
 .libre {
   border: 2px dashed var(--accent);
   border-radius: 4px;
   padding: 0.35rem 0.5rem;
   font-size: clamp(0.66rem, 0.4vw + 0.4rem, 0.76rem);
-  color: var(--accent);
+  color: var(--ink);
 }
+.libre strong { color: var(--accent); }
 .libre-pleine { margin: 6px 0 0 64px; }
 .note { font-size: 1.2rem; font-weight: 600; margin: 1.2rem 0 0.2rem; }
