@@ -21,6 +21,21 @@ en YAML, publiée sur GitHub Pages à chaque poussée sur `main`.
 - Le workflow `.github/workflows/deploy.yml` lint (`yamllint`, `ruff`),
   construit et déploie sur GitHub Pages.
 
+## Charte graphique
+
+Couleurs, polices, blason et styles communs proviennent de la
+[charte de la compagnie](https://github.com/arcpontoise/charte), chargée
+directement depuis <https://charte.arcpontoise.fr/> par chaque page et par les PDF
+générés. Les gabarits ne contiennent que les styles propres à ce site et
+utilisent les variables de la charte (`--ink`, `--blue`, `--accent`…).
+
+La génération des PDF télécharge donc la charte : la construction doit avoir
+accès au réseau. Pour tester avec une copie locale de la charte :
+
+```bash
+CHARTE_URL=file://$HOME/git/arcpontoise_charte python scripts/build.py
+```
+
 ## Mise à jour d'une saison
 
 1. Créer une branche.

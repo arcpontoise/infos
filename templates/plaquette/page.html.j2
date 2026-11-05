@@ -53,8 +53,8 @@
 .volet {
   position: relative;
   overflow: hidden;
-  background: var(--carte);
-  border: 1px solid var(--filet);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 6px;
   padding: 1.1rem 1.2rem;
 }
@@ -71,20 +71,20 @@
 .volet > *:not(.decor) { position: relative; z-index: 1; }
 .affiliation { margin-top: auto; padding-top: 1rem; text-align: center; }
 .affiliation img { width: 46mm; max-width: 70%; height: auto; }
-.affiliation p { font-size: 0.8rem; color: var(--gris); margin: 0.3rem 0 0; }
+.affiliation p { font-size: 0.8rem; color: var(--gray); margin: 0.3rem 0 0; }
 .couverture .affiliation p { color: #ccd4ea; }
 .volet h2 {
   margin: 0 0 0.7rem;
   font-size: 1.05rem;
-  color: var(--bleu);
-  border-bottom: 1px solid var(--filet);
+  color: var(--blue);
+  border-bottom: 1px solid var(--border);
   padding-bottom: 0.4rem;
 }
 .volet p { margin: 0.35rem 0; font-size: 0.92rem; }
 .couverture {
-  background: var(--bleu);
-  color: var(--fond);
-  border-color: var(--bleu);
+  background: var(--blue);
+  color: var(--bg);
+  border-color: var(--blue);
   text-align: center;
 }
 .couverture .logo-couv {
@@ -96,7 +96,7 @@
 }
 .couverture .manuscrit { font-size: 2rem; line-height: 1.05; margin: 1rem 0 0.1rem; color: #ccd4ea; }
 .couverture h2 {
-  color: var(--fond);
+  color: var(--bg);
   border: none;
   font-size: 1.35rem;
   margin: 0 0 0.8rem;
@@ -117,13 +117,13 @@
   margin: 0 0 0.9rem;
 }
 .groupe h3 { margin: 0; font-size: 0.98rem; }
-.groupe .public p { color: var(--gris); font-weight: 600; margin: 0.15rem 0; }
-.groupe .quand { font-weight: 600; color: var(--bleu); }
-.groupe .descr p { color: var(--gris); }
+.groupe .public p { color: var(--gray); font-weight: 600; margin: 0.15rem 0; }
+.groupe .quand { font-weight: 600; color: var(--blue); }
+.groupe .descr p { color: var(--gray); }
 .groupe .cout { font-weight: 700; }
-.groupe .cout span { display: block; font-weight: 400; color: var(--gris); font-size: 0.85rem; }
+.groupe .cout span { display: block; font-weight: 400; color: var(--gray); font-size: 0.85rem; }
 .contact { margin: 0 0 0.7rem; }
-.contact .role { color: var(--gris); font-size: 0.85rem; margin: 0; }
+.contact .role { color: var(--gray); font-size: 0.85rem; margin: 0; }
 .contact .qui { font-weight: 600; margin: 0; }
 .reseau { display: flex; align-items: center; gap: 0.55rem; margin: 0.45rem 0; }
 .reseau svg { width: 22px; height: 22px; color: var(--accent); flex: none; }
@@ -136,12 +136,12 @@
 }
 .qr { text-align: center; margin: 0; }
 .qr svg { width: 30mm; height: 30mm; display: block; }
-.qr figcaption { font-size: 0.8rem; color: var(--gris); margin-top: 0.25rem; max-width: 30mm; }
+.qr figcaption { font-size: 0.8rem; color: var(--gray); margin-top: 0.25rem; max-width: 30mm; }
 .securite { font-weight: 700; }
 @media print {
   @page { size: A4 landscape; margin: 0; }
   body { background: #fff; font-size: 13.5px; }
-  header, nav.site, footer, .telecharger { display: none; }
+  header.site, nav.site, footer.site, .telecharger { display: none; }
   main { padding: 0; max-width: none; }
   .plaquette { display: block; }
   .planche { display: flex; width: 297mm; height: 210mm; page-break-after: always; }
@@ -155,7 +155,7 @@
     border-radius: 0;
     overflow: hidden;
   }
-  .volet + .volet { border-left: 0.3mm dashed var(--filet); }
+  .volet + .volet { border-left: 0.3mm dashed var(--border); }
   .couverture { border: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .volet h2 { font-size: 19px; margin: 0 0 3mm; padding-bottom: 1.5mm; }
   .volet p, .groupe p { font-size: 13.5px; line-height: 1.5; margin: 1.3mm 0; }

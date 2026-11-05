@@ -2,30 +2,30 @@
 {% block titre %}Calculateur de licences {{ saison_tarifs }}{% endblock %}
 {% block description %}Estimez le coût des licences {{ saison_tarifs }} pour votre famille, remises comprises.{% endblock %}
 {% block styles %}
-.intro { color: var(--gris); margin: 0 0 1rem; }
+.intro { color: var(--gray); margin: 0 0 1rem; }
 .archer {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem 1.2rem;
   align-items: center;
-  background: var(--carte);
-  border: 1px solid var(--filet);
-  border-left: 4px solid var(--bleu);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--blue);
   border-radius: 6px;
   padding: 0.8rem 1rem;
   margin-bottom: 0.7rem;
 }
-.archer .rang { font-weight: 700; color: var(--bleu-fonce); min-width: 6.5rem; }
-.archer select { font: inherit; padding: 0.35rem 0.5rem; border: 1px solid var(--filet); border-radius: 4px; }
+.archer .rang { font-weight: 700; color: var(--ink); min-width: 6.5rem; }
+.archer select { font: inherit; padding: 0.35rem 0.5rem; border: 1px solid var(--border); border-radius: 4px; }
 .archer .options { display: inline-flex; flex-wrap: wrap; gap: 0.3rem 1rem; }
 .archer label.case { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.9rem; }
 .archer label.case[hidden] { display: none; }
 .archer .sous-total { margin-left: auto; font-weight: 700; }
 .archer .retirer {
   background: none;
-  border: 1px solid var(--filet);
+  border: 1px solid var(--border);
   border-radius: 4px;
-  color: var(--gris);
+  color: var(--gray);
   padding: 0.3rem 0.6rem;
   cursor: pointer;
 }
@@ -33,7 +33,7 @@
 .actions button {
   font: inherit;
   font-weight: 600;
-  background: var(--bleu);
+  background: var(--blue);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -41,19 +41,19 @@
   cursor: pointer;
 }
 .total {
-  background: var(--carte);
-  border: 1px solid var(--filet);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-left: 4px solid var(--accent);
   border-radius: 6px;
   padding: 1rem 1.2rem;
   font-size: 1.05rem;
 }
-.total strong { font-size: 1.35rem; color: var(--bleu-fonce); }
-.mentions { margin-top: 1rem; font-size: 0.88rem; color: var(--gris); }
-.actions button:disabled { background: var(--gris-doux); cursor: not-allowed; }
+.total strong { font-size: 1.35rem; color: var(--ink); }
+.mentions { margin-top: 1rem; font-size: 0.88rem; color: var(--gray); }
+.actions button:disabled { background: var(--gray-soft); cursor: not-allowed; }
 .notes { margin-top: 1rem; }
 .notes p { margin: 0.4rem 0; font-size: 1.2rem; font-weight: bold; }
-.notes p span { color: var(--rouge); }
+.notes p span { color: var(--danger); }
 {% endblock %}
 {% block contenu %}
 <p class="intro">

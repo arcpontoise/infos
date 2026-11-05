@@ -5,13 +5,13 @@
   gap: 0.4rem 1.4rem;
   margin: 0 0 1rem;
   font-size: 0.85rem;
-  color: var(--gris);
+  color: var(--gray);
 }
 .legende span { display: inline-flex; align-items: center; gap: 0.45rem; }
 .pastille { display: inline-block; width: 13px; height: 13px; border-radius: 2px; flex: none; }
 .pastille.jeunes { background: var(--accent); }
-.pastille.adultes { background: var(--bleu); }
-.pastille.tous { background: var(--bleu-moyen); }
+.pastille.adultes { background: var(--blue); }
+.pastille.tous { background: var(--blue-mid); }
 .pastille.libre { background: none; border: 2px dashed var(--accent); }
 .grille { min-width: {{ 58 + jours_grille | length * 115 }}px; }
 .entetes, .corps, .rangee-libre {
@@ -24,9 +24,9 @@
   padding: 0.5rem 0.3rem;
   font-size: clamp(0.78rem, 0.5vw + 0.42rem, 0.95rem);
   text-align: center;
-  color: var(--bleu);
-  background: var(--carte);
-  border: 1px solid var(--filet);
+  color: var(--blue);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-bottom: none;
   border-radius: 6px 6px 0 0;
 }
@@ -36,7 +36,7 @@
   right: 8px;
   transform: translateY(-55%);
   font-size: clamp(0.7rem, 0.35vw + 0.45rem, 0.82rem);
-  color: var(--gris);
+  color: var(--gray);
 }
 .colonne {
   position: relative;
@@ -44,11 +44,11 @@
   background:
     repeating-linear-gradient(
       to bottom,
-      var(--filet) 0 1px,
+      var(--border) 0 1px,
       transparent 1px calc(100% / {{ nb_heures }})
     )
-    var(--carte);
-  border: 1px solid var(--filet);
+    var(--card);
+  border: 1px solid var(--border);
   border-top: none;
 }
 .bloc {
@@ -71,10 +71,11 @@
   line-height: 1.22;
 }
 .bloc.compact h3 { margin: 1px 0; }
-.bloc.jeunes { background: var(--accent); border-color: var(--bleu); }
-.bloc.adultes { background: var(--bleu); border-color: var(--bleu-fonce); }
-.bloc.tous { background: var(--bleu-moyen); border-color: var(--bleu-fonce); }
+.bloc.jeunes { background: var(--accent); border-color: var(--blue); }
+.bloc.adultes { background: var(--blue); border-color: var(--ink); }
+.bloc.tous { background: var(--blue-mid); border-color: var(--ink); }
 .bloc h3 {
+  color: inherit;
   margin: 1px 0 2px;
   font-size: 1.02em;
   font-weight: 600;

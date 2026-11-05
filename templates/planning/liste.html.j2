@@ -5,7 +5,7 @@
 <p class="adresse">Salle d'armes et terrain, 1 rue Pierre de Coubertin, Pontoise</p>
 {% endblock %}
 {% block styles %}
-header .adresse { margin: 0.3rem 0 0; color: #ccd4ea; font-size: 0.92rem; }
+header.site .adresse { margin: 0.3rem 0 0; color: #ccd4ea; font-size: 0.92rem; }
 .autre-vue { margin: 0 0 1rem; }
 .autre-vue a { color: var(--accent); font-weight: 600; }
 .legende {
@@ -14,13 +14,13 @@ header .adresse { margin: 0.3rem 0 0; color: #ccd4ea; font-size: 0.92rem; }
   gap: 0.4rem 1.4rem;
   margin: 0 0 1rem;
   font-size: 0.88rem;
-  color: var(--gris);
+  color: var(--gray);
 }
 .legende span { display: inline-flex; align-items: center; gap: 0.45rem; }
 .pastille { width: 14px; height: 14px; border-radius: 2px; flex: none; }
 .pastille.jeunes { background: var(--accent); }
-.pastille.adultes { background: var(--bleu); }
-.pastille.tous { background: var(--bleu-moyen); }
+.pastille.adultes { background: var(--blue); }
+.pastille.tous { background: var(--blue-mid); }
 .pastille.libre { background: none; border: 2px dashed var(--accent); }
 .semaine {
   display: grid;
@@ -29,29 +29,29 @@ header .adresse { margin: 0.3rem 0 0; color: #ccd4ea; font-size: 0.92rem; }
   align-items: start;
 }
 .jour {
-  background: var(--carte);
-  border: 1px solid var(--filet);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 6px;
   padding: 1rem 1rem 1.1rem;
 }
 .jour h2 {
   margin: 0 0 0.75rem;
   font-size: 1.05rem;
-  color: var(--bleu);
-  border-bottom: 1px solid var(--filet);
+  color: var(--blue);
+  border-bottom: 1px solid var(--border);
   padding-bottom: 0.45rem;
 }
 .creneau {
-  border-left: 3px solid var(--gris-doux);
+  border-left: 3px solid var(--gray-soft);
   padding: 0.15rem 0 0.25rem 0.8rem;
   margin: 0 0 0.9rem;
 }
 .creneau.jeunes { border-color: var(--accent); }
-.creneau.adultes { border-color: var(--bleu); }
-.creneau.tous { border-color: var(--bleu-moyen); }
-.heure { font-weight: 700; color: var(--bleu); }
+.creneau.adultes { border-color: var(--blue); }
+.creneau.tous { border-color: var(--blue-mid); }
+.heure { font-weight: 700; color: var(--blue); }
 .creneau h3 { margin: 0.1rem 0 0.15rem; font-size: 1rem; font-weight: 600; }
-.creneau p { margin: 0.1rem 0 0; font-size: 0.88rem; color: var(--gris); }
+.creneau p { margin: 0.1rem 0 0; font-size: 0.88rem; color: var(--gray); }
 .libre {
   border: 2px dashed var(--accent);
   border-radius: 4px;
@@ -63,8 +63,8 @@ header .adresse { margin: 0.3rem 0 0; color: #ccd4ea; font-size: 0.92rem; }
 .note { font-size: 1.2rem; font-weight: 600; margin: 1.2rem 0 0.2rem; }
 @media print {
   body { background: #fff; font-size: 12px; }
-  header { background: none; color: var(--encre); border-bottom-color: var(--encre); padding: 0 0 0.5rem; }
-  header .manuscrit, header .adresse { color: var(--gris); }
+  header.site { background: none; color: var(--ink); border-bottom-color: var(--ink); padding: 0 0 0.5rem; }
+  header.site .manuscrit, header.site .adresse { color: var(--gray); }
   nav.site, .autre-vue { display: none; }
   .semaine { grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
   .jour { border-radius: 0; break-inside: avoid; }

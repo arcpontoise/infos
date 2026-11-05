@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import re
 import shutil
 import sys
@@ -25,6 +26,8 @@ from markupsafe import Markup, escape
 RACINE = Path(__file__).resolve().parent.parent
 TEMPLATES = RACINE / "templates"
 DIST = RACINE / "dist"
+# Shared visual identity, loaded directly by every page; override for local tests
+CHARTE = os.environ.get("CHARTE_URL", "https://charte.arcpontoise.fr").rstrip("/")
 
 # template -> chemin de sortie dans dist/
 PAGES = {
@@ -565,6 +568,7 @@ def principal() -> int:
             contexte_t["montants_supplements"],
         ),
         "date_generation": date.today().strftime("%d/%m/%Y"),
+        "charte": CHARTE,
         "logo_existe": (RACINE / "static" / "img" / "logo.jpg").is_file(),
         "pdf_planning": f"planning-{planning['saison']}.pdf",
         "pdf_plaquette": f"plaquette-{planning['saison']}.pdf",

@@ -3,26 +3,26 @@
 {% block description %}Prix des licences {{ saison_tarifs }} par catégorie, avec les remises famille.{% endblock %}
 {% block styles %}
 .defilement { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; min-width: 900px; background: var(--carte); font-size: 0.92rem; }
-caption { text-align: left; padding: 0 0 0.6rem; color: var(--gris); }
-th, td { border: 1px solid var(--filet); padding: 0.5rem 0.65rem; text-align: right; }
-th[scope="col"] { background: var(--bleu); color: #fff; font-weight: 600; text-align: center; }
-th[scope="row"] { text-align: left; font-weight: 600; color: var(--bleu-fonce); background: #eef1f8; }
-th[scope="row"] small { display: block; font-weight: 400; color: var(--gris); }
+table { border-collapse: collapse; width: 100%; min-width: 900px; background: var(--card); font-size: 0.92rem; }
+caption { text-align: left; padding: 0 0 0.6rem; color: var(--gray); }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: right; }
+th[scope="col"] { background: var(--blue); color: #fff; font-weight: 600; text-align: center; }
+th[scope="row"] { white-space: normal; text-align: left; font-weight: 600; color: var(--ink); background: #eef1f8; }
+th[scope="row"] small { display: block; font-weight: 400; color: var(--gray); }
 td.total { font-weight: 700; background: #e8edf7; }
 .notes { margin-top: 1rem; }
 .notes p { margin: 0.4rem 0; font-size: 1.2rem; font-weight: bold; }
-.notes p span { color: var(--rouge); }
+.notes p span { color: var(--danger); }
 .telecharger { margin: 0 0 1rem; }
 .telecharger a { color: var(--accent); font-weight: 600; }
 @media print {
   @page { size: A4 landscape; margin: 10mm; }
   body { background: #fff; font-size: 15px; }
-  nav.site, .telecharger, footer { display: none; }
-  header { background: none; color: var(--encre); border-bottom-color: var(--encre); padding: 0 0 0.5rem; }
-  header .manuscrit { display: none; }
-  h1 { font-size: 1.5rem; margin: 0; }
-  .logo { height: 38px; }
+  nav.site, .telecharger, footer.site { display: none; }
+  header.site { background: none; color: var(--ink); border-bottom-color: var(--ink); padding: 0 0 0.5rem; }
+  header.site .manuscrit { display: none; }
+  header.site .titre { font-size: 1.5rem; margin: 0; }
+  header.site .logo { height: 38px; }
   main { padding: 0.5rem 0 0; }
   .defilement { overflow: visible; }
   table { min-width: 0; width: 100%; table-layout: fixed; font-size: 15px; }
