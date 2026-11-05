@@ -28,6 +28,9 @@ TEMPLATES = RACINE / "templates"
 DIST = RACINE / "dist"
 # Shared visual identity, loaded directly by every page; override for local tests
 CHARTE = os.environ.get("CHARTE_URL", "https://charte.arcpontoise.fr").rstrip("/")
+# Local checkout of the charte used when rendering PDFs (set by CI): PDFs then match
+# an exact charte commit instead of whatever the CDN currently serves
+CHARTE_LOCAL = os.environ.get("CHARTE_LOCAL", "")
 
 # template -> chemin de sortie dans dist/
 PAGES = {
@@ -414,11 +417,50 @@ def contexte_tarifs(donnees: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def charte_locale() -> str | None:
+    """Return the file:// prefix of the local charte checkout, if one is configured."""
+    if not CHARTE_LOCAL:
+        return None
+    dossier = Path(CHARTE_LOCAL).resolve()
+    if not (dossier / "css" / "tokens.css").is_file():
+        raise FileNotFoundError(f"CHARTE_LOCAL={CHARTE_LOCAL} is not a charte checkout")
+    return dossier.as_uri()
+
+
+def fetcher_pdf():
+    """Build a WeasyPrint URL fetcher serving charte URLs from the local checkout.
+
+    Returns None (default fetcher) when no local checkout is configured.
+    """
+    locale = charte_locale()
+    if locale is None:
+        return None
+
+    def reecrire(url: str) -> str:
+        # Only rewrite the charte origin; every other URL is fetched as usual
+        if url.startswith(f"{CHARTE}/"):
+            return locale + url[len(CHARTE) :]
+        return url
+
+    try:
+        from weasyprint import URLFetcher
+    except ImportError:  # WeasyPrint < URLFetcher API: function-based fetcher
+        from weasyprint import default_url_fetcher
+
+        return lambda url, *args, **kwargs: default_url_fetcher(reecrire(url), *args, **kwargs)
+
+    class FetcherCharte(URLFetcher):
+        def fetch(self, url, headers=None):
+            return super().fetch(reecrire(url), headers)
+
+    return FetcherCharte()
+
+
 def generer_pdf(source: Path, sortie: Path) -> None:
     """Rend une page HTML en PDF via WeasyPrint (importé par l'appelant)."""
     from weasyprint import HTML
 
-    HTML(filename=str(source)).write_pdf(str(sortie))
+    HTML(filename=str(source), url_fetcher=fetcher_pdf()).write_pdf(str(sortie))
     print(f"Généré : {sortie.relative_to(RACINE)}")
 
 

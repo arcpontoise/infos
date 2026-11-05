@@ -6,3 +6,7 @@ rules:
     max: 120
   truthy:
     check-keys: false
+
+ignore: |
+  _charte/
+  dist/

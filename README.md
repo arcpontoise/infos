@@ -29,12 +29,26 @@ directement depuis <https://charte.arcpontoise.fr/> par chaque page et par les P
 générés. Les gabarits ne contiennent que les styles propres à ce site et
 utilisent les variables de la charte (`--ink`, `--blue`, `--accent`…).
 
-La génération des PDF télécharge donc la charte : la construction doit avoir
-accès au réseau. Pour tester avec une copie locale de la charte :
+Les PDF figent la charte au moment du build. Pour qu'ils restent à jour :
+
+- chaque modification de la charte relance automatiquement le workflow de ce
+  dépôt (`workflow_dispatch` déclenché par le dépôt `charte`, avec le commit de
+  la charte en paramètre `charte_ref`) ;
+- le workflow clone la charte à ce commit dans `_charte/` et `build.py` sert
+  les URL `https://charte.arcpontoise.fr/…` depuis cette copie
+  (`CHARTE_LOCAL`) pendant la génération des PDF. Le PDF correspond ainsi
+  exactement au commit de la charte, sans dépendre du cache de GitHub Pages.
+  Le HTML publié garde les URL normales.
+
+En local, sans `CHARTE_LOCAL`, les PDF utilisent la charte en ligne. Pour
+reproduire le build de la CI ou tester une modification de la charte :
 
 ```bash
-CHARTE_URL=file://$HOME/git/arcpontoise_charte python scripts/build.py
+CHARTE_LOCAL=$HOME/git/arcpontoise_charte python scripts/build.py
 ```
+
+Un rebuild manuel avec une version précise de la charte se lance depuis
+l'onglet *Actions* (« Run workflow », champ `charte_ref`).
 
 ## Mise à jour d'une saison
 

@@ -5,6 +5,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      charte_ref:
+        description: Commit ou branche de la charte utilisé pour générer les PDF
+        required: false
+        default: main
+        type: string
 
 permissions:
   contents: read
@@ -35,8 +41,20 @@ jobs:
         run: |
           ruff check scripts
           ruff format --check scripts
+      # Checked out after linting so the charte files are not linted here
+      - name: Charte graphique pour les PDF
+        uses: actions/checkout@v7
+        with:
+          repository: arcpontoise/charte
+          ref: ${{ inputs.charte_ref || 'main' }}
+          path: _charte
+          persist-credentials: false
       - name: Génération
-        run: python scripts/build.py
+        env:
+          CHARTE_LOCAL: ${{ github.workspace }}/_charte
+        run: |
+          echo "Charte utilisée pour les PDF : $(git -C "$CHARTE_LOCAL" rev-parse --short HEAD)"
+          python scripts/build.py
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:
