@@ -4,6 +4,7 @@ name: Build et déploiement
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
     inputs:
       charte_ref:
@@ -14,18 +15,42 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
+# A new push to a pull request cancels its previous run; main runs always finish
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  build:
+  # Required status check of the main branch ruleset
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Dépendances
+        run: pip install -r requirements.txt
+      - name: Lint YAML
+        run: yamllint .
+      - name: Lint Python
+        run: |
+          ruff check scripts
+          ruff format --check scripts
+      - name: Validation des données
+        run: python scripts/build.py --check
+
+  # Also run on pull requests so a broken page or PDF never reaches main
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
@@ -35,13 +60,6 @@ jobs:
           sudo apt-get install --yes libpango-1.0-0 libpangoft2-1.0-0
       - name: Dépendances
         run: pip install -r requirements.txt
-      - name: Lint YAML
-        run: yamllint .
-      - name: Lint Python
-        run: |
-          ruff check scripts
-          ruff format --check scripts
-      # Checked out after linting so the charte files are not linted here
       - name: Charte graphique pour les PDF
         uses: actions/checkout@v7
         with:
@@ -55,17 +73,26 @@ jobs:
         run: |
           echo "Charte utilisée pour les PDF : $(git -C "$CHARTE_LOCAL" rev-parse --short HEAD)"
           python scripts/build.py
-      - uses: actions/configure-pages@v6
-      - uses: actions/upload-pages-artifact@v5
+      - if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    # Never interrupt a deployment in progress
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/configure-pages@v6
       - id: deployment
         uses: actions/deploy-pages@v5

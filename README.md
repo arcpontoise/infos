@@ -29,6 +29,24 @@ directement depuis <https://charte.arcpontoise.fr/> par chaque page et par les P
 générés. Les gabarits ne contiennent que les styles propres à ce site et
 utilisent les variables de la charte (`--ink`, `--blue`, `--accent`…).
 
+L'en-tête affiche le menu commun à tous les sites de la compagnie
+(`<arc-menu actuel="inscrire">` dans `templates/base.html.j2`), chargé lui aussi
+en direct depuis la charte : il se modifie dans `menu.yaml` du dépôt `charte`,
+sans rebuild de ce site. La barre `nav.site` ne contient que les pages propres
+à ce site. Le menu est masqué à l'impression et n'apparaît pas dans les PDF.
+
+Pour tester une modification de la charte sur les pages web, servir la charte
+en local et la désigner avec `CHARTE_URL` :
+
+```bash
+(cd ~/git/arcpontoise_charte && python3 -m http.server 8001) &
+CHARTE_URL=http://localhost:8001 python scripts/build.py
+(cd dist && python3 -m http.server 8002)
+```
+
+Le serveur de test de Python n'envoie pas d'en-tête CORS : la police Caveat
+n'est donc pas chargée dans ce cas, contrairement à GitHub Pages.
+
 Les PDF figent la charte au moment du build. Pour qu'ils restent à jour :
 
 - chaque modification de la charte relance automatiquement le workflow de ce
