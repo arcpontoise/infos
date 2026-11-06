@@ -8,6 +8,7 @@
 <link rel="icon" href="{{ charte }}/img/logo.png">
 <link rel="stylesheet" href="{{ charte }}/css/tokens.css">
 <link rel="stylesheet" href="{{ charte }}/css/charte.css">
+<script src="{{ charte }}/js/menu.js" defer></script>
 <style>
 /* Site-specific rules; shared styles come from the charte */
 /* Generated PDFs use the embedded font, so every build machine renders them the same */
@@ -24,10 +25,15 @@
     <h1 class="titre">{% block entete %}{{ self.titre() }}{% endblock %}</h1>
     {% block sous_entete %}{% endblock %}
     </div>
+    {# Shared menu of all the club's sites; links are a fallback until menu.js loads #}
+    <arc-menu actuel="inscrire">
+      <a href="https://arcpontoise.fr/">Accueil</a>
+      <a href="https://contact.arcpontoise.fr/">Contact</a>
+    </arc-menu>
   </div>
 </header>
-<nav class="site gabarit">
-  <a href="{{ prefixe }}."{% if page == 'accueil' %} aria-current="page"{% endif %}>Accueil</a>
+<nav class="site gabarit" aria-label="Infos pratiques">
+  <a href="{{ prefixe }}."{% if page == 'accueil' %} aria-current="page"{% endif %}>Saison</a>
   <a href="{{ prefixe }}planning/"{% if page == 'planning' %} aria-current="page"{% endif %}>Planning</a>
   <a href="{{ prefixe }}tarifs/"{% if page == 'tarifs' %} aria-current="page"{% endif %}>Tarifs</a>
   <a href="{{ prefixe }}calculateur/"{% if page == 'calculateur' %} aria-current="page"{% endif %}>Calculateur</a>
