@@ -68,6 +68,14 @@ CHARTE_LOCAL=$HOME/git/arcpontoise_charte python scripts/build.py
 Un rebuild manuel avec une version précise de la charte se lance depuis
 l'onglet *Actions* (« Run workflow », champ `charte_ref`).
 
+## Mesure d'audience
+
+Les pages chargent `static/js/stats.js`, copie de `suivi/stats.js` du dépôt
+[stats](https://github.com/arcpontoise/stats) : mesure anonyme par Matomo
+(site n° 3), réglée pour l'exemption de consentement de la CNIL, avec le lien
+« Refuser la mesure d'audience » en pied de page. Rien n'est envoyé depuis
+un aperçu local ni pendant la génération des PDF.
+
 ## Mise à jour d'une saison
 
 1. Créer une branche.
