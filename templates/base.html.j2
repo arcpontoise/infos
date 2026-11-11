@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="{{ charte }}/css/tokens.css">
 <link rel="stylesheet" href="{{ charte }}/css/charte.css">
 <script src="{{ charte }}/js/menu.js" defer></script>
+{# Audience measurement, CNIL-exempt: see arcpontoise/stats (id 3 = infos) #}
+<script src="{{ prefixe }}static/js/stats.js" data-site="3" defer></script>
 <style>
 /* Site-specific rules; shared styles come from the charte */
 /* Generated PDFs use the embedded font, so every build machine renders them the same */
@@ -43,7 +45,9 @@
 {% block contenu %}{% endblock %}
 </main>
 <footer class="site gabarit">
-  <p>Mis à jour le {{ date_generation }} — <a href="https://arcpontoise.fr/">arcpontoise.fr</a></p>
+  <p>Mis à jour le {{ date_generation }} — <a href="https://arcpontoise.fr/">arcpontoise.fr</a> —
+    <a href="https://arcpontoise.fr/mentions-legales/">Mentions légales</a></p>
+  <p><button type="button" class="stats-refus" data-stats-refus hidden></button></p>
 </footer>
 </body>
 </html>
